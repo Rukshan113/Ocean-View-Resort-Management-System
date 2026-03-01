@@ -57,3 +57,111 @@ button {
 button:hover {
     background-color: #0f6cd6;
 }
+
+/*admin dashboard */
+
+.admin_page_header{
+    color: black;
+    text-align: left;
+    margin: 1rem;
+}
+
+.admin_page{
+    background-color: #f4f6f9;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 2rem;
+}
+
+.admin_page form{
+     margin: 0;
+}
+
+.container {
+    display: flex;
+    gap: 2rem;
+}
+
+.container > form{
+    flex: 1;
+}
+
+.container > div{
+    flex: 4;
+}
+
+.user_search > form{
+    margin-bottom: 2rem;
+    display: flex;
+    width: 40%;
+    gap: 1rem;
+}
+
+.search_field{
+    flex: 2;
+}
+
+.search_btn{
+    flex: 1;
+}
+
+table, th, td { 
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 5px;
+    width: 100%;
+    table-layout: fixed;
+}
+
+td, th {
+    word-wrap: break-word;
+}
+
+.action_form{
+    padding: 0;
+    background-color: transparent;
+    box-shadow: none;
+    
+}
+
+.action_form button {
+    margin-right: 1rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    margin-top: 0;
+    height: auto;
+    padding: 0.5rem 1rem;
+    border: none;
+    cursor: pointer;
+    width: auto;
+}
+
+a{
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #1e90ff;
+    color: white;
+    font-size: 1rem;
+    border-radius: 0.8rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a:hover {
+    background-color: #0f6cd6;
+}
+
+select{
+    width: 100%;
+    height: 2.5rem;
+    padding: 0.3rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ccc;
+    margin-top: 1rem;
+}
+
+.admin_page input, button{
+    height: 2.5rem;
+}

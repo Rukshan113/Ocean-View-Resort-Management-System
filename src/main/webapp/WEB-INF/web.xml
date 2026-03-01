@@ -12,6 +12,16 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>AdminServlet</servlet-name>
+        <servlet-class>com.mycompany.oceanview.AdminServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdminServlet</servlet-name>
+        <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30
