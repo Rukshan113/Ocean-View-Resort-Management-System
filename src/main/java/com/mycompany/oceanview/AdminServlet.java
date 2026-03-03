@@ -26,7 +26,6 @@ public class AdminServlet extends HttpServlet {
                 String search = request.getParameter("search");
                 List<User> users = dao.getAllUsers(search);
                 request.setAttribute("userList", users);
-                System.out.println("Users count: " + users.size());
                 request.getRequestDispatcher("admin_dashboard.jsp").forward(request, response);
             }
 

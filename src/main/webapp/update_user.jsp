@@ -12,47 +12,36 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>Update User</title>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Update User</title>
+        <link rel="stylesheet" href="styles.css"/>
+    </head>
+    
+    <body class="update-user-page">
+        <h2>Update User</h2>
 
-<h2>Update User</h2>
+        <form method="post" action="admin">
+            <input type="hidden" name="action" value="update">
+            <input type="hidden" name="id" value="<%=user.getId()%>">
 
-<form method="post" action="admin">
-    <input type="hidden" name="action" value="update">
-    <input type="hidden" name="id" value="<%=user.getId()%>">
+            <label for="username">username</label>
+            <input type="text" name="username" value="<%=user.getUsername()%>" id="username" required>
 
-    Username:
-    <input type="text" name="username"
-           value="<%=user.getUsername()%>" required><br><br>
+             <label for="email">email</label>
+             <input type="email" name="email" value="<%=user.getEmail()%>" id="email" required>
 
-    Email:
-    <input type="email" name="email"
-           value="<%=user.getEmail()%>" required><br><br>
-
-    Role:
-    <select name="role">
-        <option value="admin"
-            <%= "admin".equals(user.getRole()) ? "selected" : "" %>>
-            Admin
-        </option>
-        <option value="manager"
-            <%= "manager".equals(user.getRole()) ? "selected" : "" %>>
-            Manager
-        </option>
-        <option value="receptionist"
-            <%= "receptionist".equals(user.getRole()) ? "selected" : "" %>>
-            Receptionist
-        </option>
-    </select><br><br>
-
-    <input type="submit" value="Update">
-</form>
-
-<br>
-<a href="admin">Back</a>
-
-</body>
+            <label for="role">role</label>
+            <select name="role" id="role">
+                <option value="admin"<%= "admin".equals(user.getRole()) ? "selected" : "" %>>
+                    Admin
+                </option>
+                <option value="receptionist"<%= "receptionist".equals(user.getRole()) ? "selected" : "" %>>
+                    Receptionist
+                </option>
+            </select>
+            <button type="submit"> Update</button>
+            <a href="admin">Go Back</a>
+        </form>
+    </body>
 </html>

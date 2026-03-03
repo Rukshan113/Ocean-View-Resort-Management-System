@@ -6,31 +6,42 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="UTF-8">
         <title>Admin Dashboard</title>
         <link rel="stylesheet" href="styles.css"/>
     </head>
     <body class="admin_page">
         <header class="admin_page_header">
-            <h2>Admin Dashboard</h2>
+            <div>
+                <h2>Admin Dashboard</h2>
+                <h3>Welcome, <%= session.getAttribute("username") %></h3>
+            </div>
+            <a class="logout-btn" href="logout">Logout</a>
         </header>
         
         <div class="container">
             <form method="post" action="admin">
                 <input type="hidden" name="action" value="create">
-                <input type="text" name="username" required placeholder="username">
-                <input type="email" name="email" required placeholder="email">
-                <input type="password" name="password" required placeholder="password">
-                <select name="role">
-                    <option value="">-- Select Role --</option>
-                    <option value="admin">Admin</option>
-                    <option value="manager">Manager</option>
+                
+                <label for="username">username</label>
+                <input type="text" name="username" id="username" placeholder="Enter username here" required>
+                
+                <label for="email">email</label>
+                <input type="email" name="email" id="email" placeholder="Enter email here" required>
+                
+                <label for="password">password</label>
+                <input type="password" name="password" id="password" placeholder="Enter password here" required>
+                
+                <label for="role">role</label>
+                <select name="role" id="role">
                     <option value="receptionist">Receptionist</option>
+                    <option value="admin">Admin</option>
                 </select>
+                
                 <button type="submit"> Create User </button>
             </form>
 
-            <div class="user_search">
+            <div class="search">
                 <form method="get" action="admin">
                     <input class="search_field" type="text" name="search">
                     <input class="search_btn" type="submit" value="Search">
@@ -53,10 +64,12 @@
                         <td>
                             <a href="admin?action=edit&amp;id=<%=u.getId()%>">Edit</a>
                             
-                            <form class="action_form" method="post" action="admin" style="display:inline;">
+                            <form class="delete-form" method="post" action="admin">
                                 <input type="hidden" name="action" value="delete">
                                 <input type="hidden" name="id" value="<%=u.getId()%>">
-                                <button type="submit">Delete</button>
+                                <button class="delete-btn" type="submit" class="delete-btn" onclick="return confirm('Are you sure you want to delete this user?');">
+                                    Delete
+                                </button>
                             </form>
                         </td>
                     </tr>

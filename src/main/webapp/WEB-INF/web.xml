@@ -13,6 +13,15 @@
     </servlet-mapping>
     
     <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>com.mycompany.oceanview.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
         <servlet-name>AdminServlet</servlet-name>
         <servlet-class>com.mycompany.oceanview.AdminServlet</servlet-class>
     </servlet>
@@ -20,6 +29,16 @@
     <servlet-mapping>
         <servlet-name>AdminServlet</servlet-name>
         <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>ReceptionistServlet</servlet-name>
+        <servlet-class>com.mycompany.oceanview.ReceptionistServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ReceptionistServlet</servlet-name>
+        <url-pattern>/receptionist</url-pattern>
     </servlet-mapping>
     
     <session-config>

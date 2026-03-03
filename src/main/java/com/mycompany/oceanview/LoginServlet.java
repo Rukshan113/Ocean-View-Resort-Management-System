@@ -47,13 +47,14 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("username", username);
                 session.setAttribute("role", role);
 
-                if (role.equals("admin")) {
-                    response.sendRedirect("admin");
-                } else if (role.equals("manager")) {
-                    response.sendRedirect("manager_dashboard.jsp");
-                }
-                else{
-                    response.sendRedirect("receptionist_dashboard.jsp");
+                switch (role) {
+                    case "admin" -> response.sendRedirect("admin");
+                    case "receptionist" -> response.sendRedirect("receptionist");
+                    default -> {
+                        response.setContentType("text/html;charset=UTF-8");
+                        response.getWriter().println("<h3 style='color:red;'>Invalid user role!</h3>");
+                        response.getWriter().println("<a href='index.html'>Go back to login</a>");
+                    }
                 }
             }
             else{
