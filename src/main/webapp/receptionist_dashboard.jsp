@@ -85,10 +85,10 @@
                         <td><%= r.getPricePerNight() %></td>
                         <td>
                             <a href="receptionist?action=bill&amp;resNo=<%= r.getReservationNo() %>">Calculate Bill</a>
-                            <form class="action-form" method="post" action="receptionist" style="display:inline;">
+                            <form class="cancel-form" method="post" action="receptionist" style="display:inline;">
                                 <input type="hidden" name="action" value="cancel">
                                 <input type="hidden" name="resNo" value="<%= r.getReservationNo() %>">
-                                <button type="submit">Cancel</button>
+                                <button class="cancel-btn" type="submit">Cancel</button>
                             </form>
                         </td>
                     </tr>

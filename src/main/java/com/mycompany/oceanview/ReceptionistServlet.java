@@ -43,9 +43,47 @@ public class ReceptionistServlet extends HttpServlet {
             psRooms.close();
             request.setAttribute("availableRooms", availableRooms);
 
-            // Load reservations for dashboard
+            
             List<Reservation> reservationList = new ArrayList<>();
-            if("search".equals(action) && request.getParameter("search") != null) {
+            //calculate bill
+            if("bill".equals(action)) {
+                int resNo = Integer.parseInt(request.getParameter("resNo"));
+
+                String sql = "SELECT r.*, rm.room_type, rm.price_per_night " +
+                             "FROM reservations r JOIN rooms rm ON r.room_id = rm.room_id " +
+                             "WHERE r.reservation_no = ?";
+                PreparedStatement ps = con.prepareStatement(sql);
+                ps.setInt(1, resNo);
+                ResultSet rs = ps.executeQuery();
+
+                if(rs.next()){
+                    Reservation r = new Reservation();
+                    r.setReservationNo(rs.getInt("reservation_no"));
+                    r.setGuestName(rs.getString("guest_name"));
+                    r.setPhone(rs.getString("contact_number"));
+                    r.setRoomType(rs.getString("room_type"));
+                    r.setPricePerNight(rs.getDouble("price_per_night"));
+
+                    // Calculate nights stayed
+                    java.sql.Date checkIn = rs.getDate("check_in");
+                    java.sql.Date checkOut = rs.getDate("check_out");
+                    int nights = (int)((checkOut.getTime() - checkIn.getTime()) / (1000 * 60 * 60 * 24));
+                    double total = r.getPricePerNight() * nights;
+
+                    request.setAttribute("reservation", r);
+                    request.setAttribute("nights", nights);
+                    request.setAttribute("total", total);
+                } else {
+                    request.setAttribute("error", "Reservation not found.");
+                }
+
+                rs.close();
+                ps.close();
+                request.getRequestDispatcher("bill.jsp").forward(request, response);
+                return; // important to stop further code
+            }
+            // Load reservations for dashboard
+            else if("search".equals(action) && request.getParameter("search") != null) {
                 String search = request.getParameter("search").trim();
                 String sql = "SELECT r.*, rm.room_number, rm.room_type, rm.price_per_night " +
                              "FROM reservations r " +
