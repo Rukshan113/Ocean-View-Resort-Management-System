@@ -1,46 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
-   version="6.0">
+<web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>com.mycompany.oceanview.LoginServlet</servlet-class>
+        <servlet-class>com.mycompany.oceanview.servlet.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
-        <servlet-class>com.mycompany.oceanview.LogoutServlet</servlet-class>
+        <servlet-class>com.mycompany.oceanview.servlet.LogoutServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
-    
+    <servlet>
+        <servlet-name>changePassword</servlet-name>
+        <servlet-class>com.mycompany.oceanview.servlet.ChangePasswordServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>changePassword</servlet-name>
+        <url-pattern>/changePassword</url-pattern>
+    </servlet-mapping>
     <servlet>
         <servlet-name>AdminServlet</servlet-name>
-        <servlet-class>com.mycompany.oceanview.AdminServlet</servlet-class>
+        <servlet-class>com.mycompany.oceanview.servlet.AdminServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>AdminServlet</servlet-name>
         <url-pattern>/admin</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>ReceptionistServlet</servlet-name>
-        <servlet-class>com.mycompany.oceanview.ReceptionistServlet</servlet-class>
+        <servlet-class>com.mycompany.oceanview.servlet.ReceptionistServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>ReceptionistServlet</servlet-name>
         <url-pattern>/receptionist</url-pattern>
     </servlet-mapping>
-    
     <session-config>
         <session-timeout>
             30

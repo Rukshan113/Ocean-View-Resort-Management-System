@@ -1,11 +1,10 @@
-package com.mycompany.oceanview;
+package com.mycompany.oceanview.model;
 
 public class Room {
     private int roomId;
     private String roomNumber;
     private String roomType;
 
-    // Getters and setters
     public int getRoomId() { return roomId; }
     public void setRoomId(int roomId) { this.roomId = roomId; }
 

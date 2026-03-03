@@ -1,0 +1,44 @@
+package com.mycompany.oceanview.servlet;
+
+import com.mycompany.oceanview.dao.UserDAO;
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
+import java.io.IOException;
+
+public class ChangePasswordServlet extends HttpServlet {
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        HttpSession session = request.getSession(false);
+        if(session == null){
+            response.sendRedirect("index.html");
+            return;
+        }
+
+        int userId = (Integer) session.getAttribute("userId");
+        String newPassword = request.getParameter("newPassword");
+        String confirmPassword = request.getParameter("confirmPassword");
+
+        if(!newPassword.equals(confirmPassword)){
+            request.setAttribute("error", "Passwords do not match");
+            request.getRequestDispatcher("change_password.jsp").forward(request, response);
+            return;
+        }
+
+        try {
+            UserDAO dao = new UserDAO();
+            dao.updatePassword(userId, newPassword, false);
+            String role = (String) session.getAttribute("role");
+            if("admin".equals(role)){
+                response.sendRedirect("admin");
+            } else {
+                response.sendRedirect("receptionist");
+            }
+
+        } catch(Exception e){
+            request.setAttribute("message", "Database Connection Error!");
+            request.getRequestDispatcher("error.jsp").forward(request, response);
+        }
+    }
+}

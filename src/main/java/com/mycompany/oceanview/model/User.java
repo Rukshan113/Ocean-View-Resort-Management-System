@@ -1,4 +1,4 @@
-package com.mycompany.oceanview;
+package com.mycompany.oceanview.model;
 
 public class User {
     private int user_id;
@@ -17,7 +17,6 @@ public class User {
         this.role = role;
     }
 
-    // Getters & Setters
     public int getId() { return user_id; }
     public void setId(int user_id) { this.user_id = user_id; }
 

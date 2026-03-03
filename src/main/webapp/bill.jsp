@@ -1,4 +1,4 @@
-<%@ page import="com.mycompany.oceanview.Reservation" %>
+<%@page import="com.mycompany.oceanview.model.Reservation"%>
 <%
     Reservation r = (Reservation) request.getAttribute("reservation");
     Integer nights = (Integer) request.getAttribute("nights");
@@ -15,6 +15,7 @@
 </head>
 <body class="bill-page">
     <header>
+        <h2>Ocean View Resort Management System</h2>
         <h2>Reservation Bill</h2>
     </header>
     <% if(error != null) { %>
@@ -32,6 +33,10 @@
             <td><%= r.getGuestName() %></td>
         </tr>
         <tr>
+            <td>Address:</td>
+            <td><%= r.getAddress() %></td>
+        </tr>
+        <tr>
             <td>Phone:</td>
             <td><%= r.getPhone() %></td>
         </tr>
@@ -46,6 +51,14 @@
         <tr>
             <td>Nights Stayed:</td>
             <td><%= nights %></td>
+        </tr>
+        <tr>
+            <td>Check-In:</td>
+            <td><%= r.getCheckIn() %></td>
+        </tr>
+        <tr>
+            <td>Check-Out:</td>
+            <td><%= r.getCheckOut() %></td>
         </tr>
         <tr>
             <td><strong>Total Amount:</strong>

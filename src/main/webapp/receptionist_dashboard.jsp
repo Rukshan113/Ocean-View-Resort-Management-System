@@ -1,7 +1,7 @@
-<%@page import="com.mycompany.oceanview.Reservation"%>
-<%@ page import="com.mycompany.oceanview.Room"%>
+<%@page import="com.mycompany.oceanview.model.Room"%>
+<%@page import="com.mycompany.oceanview.model.Reservation"%>
 <%@ page import="jakarta.servlet.http.HttpSession" %>
-<%@ page import="java.util.List, com.mycompany.oceanview.Reservation" %>
+<%@ page import="java.util.List" %>
 <%
     List<Reservation> reservationList = (List<Reservation>) request.getAttribute("reservationList");
 %>
@@ -13,7 +13,7 @@
         <title>Receptionist Dashboard</title>
         <link rel="stylesheet" href="styles.css"/>
     </head>
-    <body class="receptionist_page">
+    <body class="receptionist-page">
         <header class="receptionist-header">
             <div>
                 <h2>Receptionist Dashboard</h2>
@@ -57,8 +57,8 @@
             <div class="search">
                 <form method="get" action="receptionist">
                     <input type="hidden" name="action" value="search">
-                    <input class="search_field" type="text" name="search">
-                    <input class="search_btn" type="submit" value="Search">
+                    <input class="search-field" type="text" name="search">
+                    <input class="search-btn" type="submit" value="Search">
                 </form>
 
                <table>

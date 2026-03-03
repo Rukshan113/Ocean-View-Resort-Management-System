@@ -1,4 +1,4 @@
-package com.mycompany.oceanview;
+package com.mycompany.oceanview.servlet;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;

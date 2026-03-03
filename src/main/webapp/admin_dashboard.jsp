@@ -1,17 +1,18 @@
-<%@ page import="java.util.List, com.mycompany.oceanview.User" %>
+<%@page import="java.util.List"%>
+<%@page import="com.mycompany.oceanview.model.User"%>
 <%
-    List<User> users = (List<User>) request.getAttribute("userList");
+    List<User> userList = (List<User>) request.getAttribute("userList");
 %>
 
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Admin Dashboard</title>
         <link rel="stylesheet" href="styles.css"/>
     </head>
-    <body class="admin_page">
-        <header class="admin_page_header">
+    <body class="admin-page">
+        <header class="admin-page-header">
             <div>
                 <h2>Admin Dashboard</h2>
                 <h3>Welcome, <%= session.getAttribute("username") %></h3>
@@ -43,40 +44,38 @@
 
             <div class="search">
                 <form method="get" action="admin">
-                    <input class="search_field" type="text" name="search">
-                    <input class="search_btn" type="submit" value="Search">
+                    <input class="search-field" type="text" name="search">
+                    <input class="search-btn" type="submit" value="Search">
                 </form>
 
                 <table>
                     <tr>
-                        <th>ID</th><th>Username</th><th>Email</th><th>Role</th><th>Actions</th>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Actions</th>
                     </tr>
 
-                    <%
-                        if(users != null){
-                            for(User u : users){
-                    %>
-                    <tr>
-                        <td><%=u.getId()%></td>
-                        <td><%=u.getUsername()%></td>
-                        <td><%=u.getEmail()%></td>
-                        <td><%=u.getRole()%></td>
-                        <td>
-                            <a href="admin?action=edit&amp;id=<%=u.getId()%>">Edit</a>
-                            
-                            <form class="delete-form" method="post" action="admin">
-                                <input type="hidden" name="action" value="delete">
-                                <input type="hidden" name="id" value="<%=u.getId()%>">
-                                <button class="delete-btn" type="submit" class="delete-btn" onclick="return confirm('Are you sure you want to delete this user?');">
-                                    Delete
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                    <%
-                            }
-                        }
-                    %>
+                    <%if(userList != null){
+                        for(User u : userList){%>
+                            <tr>
+                                <td><%=u.getId()%></td>
+                                <td><%=u.getUsername()%></td>
+                                <td><%=u.getEmail()%></td>
+                                <td><%=u.getRole()%></td>
+                                <td>
+                                    <a href="admin?action=edit&amp;id=<%=u.getId()%>">Edit</a>
+                                    <form class="delete-form" method="post" action="admin">
+                                        <input type="hidden" name="action" value="delete">
+                                        <input type="hidden" name="id" value="<%=u.getId()%>">
+                                        <button class="delete-btn" type="submit" onclick="return confirm('Are you sure you want to delete this user?');">
+                                            Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <%}
+                    }%>
                 </table>
             </div>
         </div>

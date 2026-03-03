@@ -1,5 +1,5 @@
+<%@page import="com.mycompany.oceanview.model.User"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="com.mycompany.oceanview.User" %>
 
 <%
     User user = (User) request.getAttribute("user");
