@@ -37,4 +37,17 @@ public class RoomDAO {
             ps.executeUpdate();
         }
     }
+    
+    public int getAvailableRoomCount() throws Exception {
+        String sql = "SELECT COUNT(*) FROM rooms WHERE status='available'";
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        }
+        return 0;
+    }
 }

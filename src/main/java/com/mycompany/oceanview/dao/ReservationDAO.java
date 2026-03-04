@@ -68,7 +68,8 @@ public class ReservationDAO {
     public List<Reservation> getAllReservations() throws Exception {
         List<Reservation> list = new ArrayList<>();
         String sql = "SELECT r.*, rm.room_number, rm.room_type, rm.price_per_night " +
-                     "FROM reservations r JOIN rooms rm ON r.room_id = rm.room_id";
+                 "FROM reservations r JOIN rooms rm ON r.room_id = rm.room_id " +  
+                 "ORDER BY r.reservation_no DESC";
 
         try (Connection con = DBConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql);
@@ -95,5 +96,70 @@ public class ReservationDAO {
 
             ps.executeUpdate();
         }
+    }
+    
+    
+    //reports
+    public int getTotalReservations() throws Exception {
+        String sql = "SELECT COUNT(*) FROM reservations";
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        }
+        return 0;
+    }
+
+    public double getTotalRevenue() throws Exception {
+        String sql = "SELECT SUM(DATEDIFF(r.check_out, r.check_in) * rm.price_per_night) " +
+                     "FROM reservations r " +
+                     "JOIN rooms rm ON r.room_id = rm.room_id";
+
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            if (rs.next()) {
+                return rs.getDouble(1);
+            }
+        }
+        return 0;
+    }
+
+    public int getCurrentMonthReservations() throws Exception {
+        String sql = "SELECT COUNT(*) FROM reservations " +
+                     "WHERE MONTH(check_in) = MONTH(CURDATE()) " +
+                     "AND YEAR(check_in) = YEAR(CURDATE())";
+
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        }
+        return 0;
+    }
+    
+    public double getCurrentMonthRevenue() throws Exception {
+        String sql = "SELECT COALESCE(SUM(DATEDIFF(r.check_out, r.check_in) * rm.price_per_night),0) " +
+                     "FROM reservations r " +
+                     "JOIN rooms rm ON r.room_id = rm.room_id " +
+                     "WHERE MONTH(r.check_in) = MONTH(CURDATE()) " +
+                     "AND YEAR(r.check_in) = YEAR(CURDATE())";
+
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            if (rs.next()) {
+                return rs.getDouble(1);
+            }
+        }
+        return 0;
     }
 }

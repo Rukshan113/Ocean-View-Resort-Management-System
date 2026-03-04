@@ -25,14 +25,14 @@
         <div class="container">
             <form class="add-reservation-form" action="receptionist" method="post">
                 <input type="hidden" name="action" value="add">
-                <label for="guestname">Guest Name</label>
-                <input type="text" name="guestName" id="guestname" placeholder="Name" required>
-                <label for="username">Username</label>
-                <input type="text" name="address" id="username" placeholder="Address">
-                <label for="username">Contact Number</label>
-                <input type="text" name="contact" required placeholder="Contact Number">
+                <label for="guestName">Guest Name</label>
+                <input type="text" name="guestName" id="guestName" placeholder="Name" required>
+                <label for="address">Address</label>
+                <input type="text" name="address" id="address" placeholder="Address">
+                <label for="contact">Contact Number</label>
+                <input type="text" name="contact" id="contact" required placeholder="Contact Number">
 
-                <label for="username">Available Rooms</label>
+                <label>Available Rooms</label>
                 <select name="roomId">
                 <%
                     List<Room> rooms = (List<Room>) request.getAttribute("availableRooms");
@@ -46,10 +46,10 @@
                 %>
                 </select>
                 
-                <label for="username">Check-in Date</label>
-                <input type="date" name="checkIn" required>
-                <label for="username">Check-out Date</label>
-                <input type="date" name="checkOut" required>
+                <label for="checkIn">Check-in Date</label>
+                <input type="date" name="checkIn" id="checkIn" required>
+                <label for="checkOut">Check-out Date</label>
+                <input type="date" name="checkOut" id="checkOut" required>
 
                 <button type="submit"> Add Reservation</button>
             </form>
@@ -69,6 +69,8 @@
                         <th>Room Number</th>
                         <th>Room Type</th>
                         <th>Price Per Night</th>
+                        <th>Check In</th>
+                        <th>Check Out</th>
                         <th>Actions</th>
                     </tr>
 
@@ -83,6 +85,8 @@
                         <td><%= r.getRoomNumber() %></td>
                         <td><%= r.getRoomType() %></td>
                         <td><%= r.getPricePerNight() %></td>
+                        <td><%= r.getCheckIn() %></td>
+                        <td><%= r.getCheckOut() %></td>
                         <td>
                             <a href="receptionist?action=bill&amp;resNo=<%= r.getReservationNo() %>">Calculate Bill</a>
                             <form class="cancel-form" method="post" action="receptionist" style="display:inline;">

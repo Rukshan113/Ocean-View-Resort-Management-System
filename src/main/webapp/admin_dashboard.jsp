@@ -19,6 +19,29 @@
             </div>
             <a class="logout-btn" href="logout">Logout</a>
         </header>
+            
+        <div class="report-cards">
+            <div class="card">
+                <h4>Total Reservations</h4>
+                <p>${totalReservations}</p>
+            </div>
+            <div class="card">
+                <h4>Total Revenue</h4>
+                <p>Rs. ${totalRevenue}</p>
+            </div>
+            <div class="card">
+                <h4>Available Rooms</h4>
+                <p>${availableRooms}</p>
+            </div>
+            <div class="card">
+                <h4>This month Reservations</h4>
+                <p>${totalMonthReservation}</p>
+            </div>          
+            <div class="card">
+                <h4>This month Revenue</h4>
+                <p>${totalMonthRevenue}</p>
+            </div>
+        </div>
         
         <div class="container">
             <form method="post" action="admin">

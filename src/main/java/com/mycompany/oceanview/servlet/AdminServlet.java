@@ -1,5 +1,7 @@
 package com.mycompany.oceanview.servlet;
 
+import com.mycompany.oceanview.dao.ReservationDAO;
+import com.mycompany.oceanview.dao.RoomDAO;
 import com.mycompany.oceanview.dao.UserDAO;
 import com.mycompany.oceanview.model.User;
 import jakarta.servlet.*;
@@ -28,6 +30,17 @@ public class AdminServlet extends HttpServlet {
                 String search = request.getParameter("search");
                 List<User> users = dao.getAllUsers(search);
                 request.setAttribute("userList", users);
+                
+                ReservationDAO rdao = new ReservationDAO();
+                RoomDAO roomDao = new RoomDAO();
+                request.setAttribute("totalReservations", rdao.getTotalReservations());
+                request.setAttribute("totalRevenue", rdao.getTotalRevenue());
+                request.setAttribute("availableRooms", roomDao.getAvailableRoomCount());
+                request.setAttribute("totalMonthReservation", rdao.getCurrentMonthReservations());
+                request.setAttribute("totalMonthRevenue", rdao.getCurrentMonthRevenue());
+                
+               
+                
                 request.getRequestDispatcher("admin_dashboard.jsp").forward(request, response);
             }
 
