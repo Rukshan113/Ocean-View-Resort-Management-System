@@ -46,6 +46,7 @@ public class AdminServlet extends HttpServlet {
 
         } catch(Exception e){
             request.setAttribute("message", "Database connection Error!");
+            request.setAttribute("redirect", "admin");
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
@@ -64,10 +65,15 @@ public class AdminServlet extends HttpServlet {
                     User user = new User();
                     user.setUsername(request.getParameter("username"));
                     user.setEmail(request.getParameter("email"));
-                    user.setPassword(request.getParameter("password"));
+
+                    // Hash the password before storing
+                    String plainPassword = request.getParameter("password");
+                    String hashedPassword = org.mindrot.jbcrypt.BCrypt.hashpw(plainPassword, org.mindrot.jbcrypt.BCrypt.gensalt());
+                    user.setPassword(hashedPassword);
+
                     user.setRole(request.getParameter("role"));
                     dao.createUser(user);
-                    }
+                }
                 case "delete" -> dao.deleteUser(Integer.parseInt(request.getParameter("id")));
                 case "update" -> {
                     User user = new User();
@@ -86,6 +92,7 @@ public class AdminServlet extends HttpServlet {
 
         } catch(Exception e){
            request.setAttribute("message", "Database connection Error!");
+           request.setAttribute("redirect", "admin");
            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }

@@ -50,7 +50,10 @@ public class ReceptionistServlet extends HttpServlet {
             if("search".equals(action) && request.getParameter("search") != null){
                 reservationList = reservationDAO.searchReservations(request.getParameter("search").trim());
                 if(reservationList.isEmpty()){
-                    request.setAttribute("error", "Reservation Not Found!");
+                    request.setAttribute("message", "Reservation Not Found!");
+                    request.setAttribute("redirect", "receptionist");
+                    request.getRequestDispatcher("error.jsp").forward(request, response);
+                    return;
                 }
             } else {
                 reservationList = reservationDAO.getAllReservations();
@@ -62,6 +65,7 @@ public class ReceptionistServlet extends HttpServlet {
         } catch(Exception e){
             e.printStackTrace();
             request.setAttribute("message", "Database connection Error in Reservation Process!");
+            request.setAttribute("redirect", "receptionist");
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
@@ -96,6 +100,7 @@ public class ReceptionistServlet extends HttpServlet {
 
         } catch(Exception e){
             request.setAttribute("message", "Database connection Error!");
+            request.setAttribute("redirect", "receptionist");
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }

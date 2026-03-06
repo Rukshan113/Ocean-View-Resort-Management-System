@@ -8,7 +8,7 @@
     <body>
         <script>
             alert('<%= request.getAttribute("message") %>');
-            window.location.href = 'index.html';
+            window.location.href = '<%= request.getAttribute("redirect") %>';
         </script>
     </body>
 </html>
