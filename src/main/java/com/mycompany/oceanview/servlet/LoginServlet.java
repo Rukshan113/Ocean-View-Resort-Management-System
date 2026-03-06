@@ -54,15 +54,18 @@ public class LoginServlet extends HttpServlet {
                         }
                     } else {
                         request.setAttribute("message", "Invalid email or password!");
+                        request.setAttribute("redirect", "index.html");
                         request.getRequestDispatcher("error.jsp").forward(request, response);
                     }
                 } else {
                     request.setAttribute("message", "Invalid email or password!");
+                    request.setAttribute("redirect", "index.html");
                     request.getRequestDispatcher("error.jsp").forward(request, response);
                 }
             }
         } catch (Exception e) {
             request.setAttribute("message", "Database Connection Error!");
+            request.setAttribute("redirect", "index.html");
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }

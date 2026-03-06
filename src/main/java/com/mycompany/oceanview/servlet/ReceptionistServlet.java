@@ -19,7 +19,7 @@ public class ReceptionistServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession(false);
-        if(session == null || !"receptionist".equals(session.getAttribute("role"))){
+        if (session == null || !"receptionist".equals(session.getAttribute("role"))) {
             response.sendRedirect("index.html");
             return;
         }
@@ -30,26 +30,29 @@ public class ReceptionistServlet extends HttpServlet {
             List<Room> availableRooms = roomDAO.getAvailableRooms();
             request.setAttribute("availableRooms", availableRooms);
 
-            if("bill".equals(action)){
+            if ("bill".equals(action)) {
                 int resNo = Integer.parseInt(request.getParameter("resNo"));
                 Reservation r = reservationDAO.getReservation(resNo);
-                if(r != null){
-                    int nights = (int)((r.getCheckOut().getTime() - r.getCheckIn().getTime()) / (1000 * 60 * 60 * 24));
+                if (r != null) {
+                    int nights = (int) ((r.getCheckOut().getTime() - r.getCheckIn().getTime()) / (1000 * 60 * 60 * 24));
                     double total = r.getPricePerNight() * nights;
                     request.setAttribute("reservation", r);
                     request.setAttribute("nights", nights);
                     request.setAttribute("total", total);
                 } else {
-                    request.setAttribute("error", "Reservation not found.");
+                    request.setAttribute("message", "Reservation not found.");
+                    request.setAttribute("redirect", "receptionist");
+                    request.getRequestDispatcher("error.jsp").forward(request, response);
+                    return;
                 }
                 request.getRequestDispatcher("bill.jsp").forward(request, response);
                 return;
             }
 
             List<Reservation> reservationList;
-            if("search".equals(action) && request.getParameter("search") != null){
+            if ("search".equals(action) && request.getParameter("search") != null) {
                 reservationList = reservationDAO.searchReservations(request.getParameter("search").trim());
-                if(reservationList.isEmpty()){
+                if (reservationList.isEmpty()) {
                     request.setAttribute("message", "Reservation Not Found!");
                     request.setAttribute("redirect", "receptionist");
                     request.getRequestDispatcher("error.jsp").forward(request, response);
@@ -62,8 +65,7 @@ public class ReceptionistServlet extends HttpServlet {
             request.setAttribute("reservationList", reservationList);
             request.getRequestDispatcher("receptionist_dashboard.jsp").forward(request, response);
 
-        } catch(Exception e){
-            e.printStackTrace();
+        } catch (Exception e) {
             request.setAttribute("message", "Database connection Error in Reservation Process!");
             request.setAttribute("redirect", "receptionist");
             request.getRequestDispatcher("error.jsp").forward(request, response);
@@ -75,7 +77,7 @@ public class ReceptionistServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession(false);
-        if(session == null || !"receptionist".equals(session.getAttribute("role"))){
+        if (session == null || !"receptionist".equals(session.getAttribute("role"))) {
             response.sendRedirect("index.html");
             return;
         }
@@ -83,7 +85,7 @@ public class ReceptionistServlet extends HttpServlet {
         String action = request.getParameter("action");
 
         try {
-            if("add".equals(action)){
+            if ("add".equals(action)) {
                 Reservation r = new Reservation();
                 r.setGuestName(request.getParameter("guestName"));
                 r.setAddress(request.getParameter("address"));
@@ -96,9 +98,16 @@ public class ReceptionistServlet extends HttpServlet {
                 roomDAO.updateRoomStatus(roomId, "booked");
 
                 response.sendRedirect("receptionist?action=dashboard");
+            } 
+            else if ("cancel".equals(action)) {
+                int resNo = Integer.parseInt(request.getParameter("resNo"));
+                int roomId = reservationDAO.deleteReservation(resNo);
+                roomDAO.updateRoomStatus(roomId, "available");
+
+                response.sendRedirect("receptionist?action=dashboard");
             }
 
-        } catch(Exception e){
+        } catch (Exception e) {
             request.setAttribute("message", "Database connection Error!");
             request.setAttribute("redirect", "receptionist");
             request.getRequestDispatcher("error.jsp").forward(request, response);

@@ -162,4 +162,27 @@ public class ReservationDAO {
         }
         return 0;
     }
+    
+    public int deleteReservation(int reservationNo) throws Exception {
+        int roomId = -1;
+        String sqlSelect = "SELECT room_id FROM reservations WHERE reservation_no = ?";
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sqlSelect)) {
+            ps.setInt(1, reservationNo);
+            try (ResultSet rs = ps.executeQuery()) {
+                if(rs.next()){
+                    roomId = rs.getInt("room_id");
+                } else {
+                    throw new Exception("Reservation not found");
+                }
+            }
+        }
+        String sqlDelete = "DELETE FROM reservations WHERE reservation_no = ?";
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sqlDelete)) {
+            ps.setInt(1, reservationNo);
+            ps.executeUpdate();
+        }
+        return roomId;
+    }
 }
