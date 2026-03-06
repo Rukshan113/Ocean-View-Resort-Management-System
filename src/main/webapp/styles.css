@@ -108,18 +108,29 @@ button:hover {
     margin: 0;
 }
 
-.logout-btn{
+.logout-btn, .help-btn{
     background-color: red;
-    display: inline-block;
     line-height: 2rem;
     font-weight: 600;
     text-align: center;
-
     max-width: 80px;
 }
 
 .logout-btn:hover{
     background-color: #c0392b;
+}
+
+.help-btn{
+    background-color: #1e90ff;
+}
+
+.help-btn:hover{
+    background-color: #0f6cd6;
+}
+
+.header-btns{
+    gap: 10px;
+    display: flex;
 }
 
 .container {
@@ -316,4 +327,36 @@ tr:hover{
     margin: 0;
     width: auto;
     padding: 1rem;
+}
+
+.help-page{
+    width: 70%;
+    margin: auto;
+    background: white;
+    padding: 30px;
+    margin-top: 40px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+}
+
+.help-page h1{
+    text-align: center;
+}
+
+.help-page h3{
+    margin-top: 1.5rem;
+}
+
+p{
+    line-height: 1.6;
+}
+
+.back{
+    max-width: 60px;
+    align-items: center;
+    margin-left: 50rem;
+}
+
+li{
+    margin-left: 3rem;
 }

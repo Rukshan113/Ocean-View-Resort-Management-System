@@ -17,7 +17,10 @@
                 <h2>Admin Dashboard</h2>
                 <h3>Welcome, <%= session.getAttribute("username") %></h3>
             </div>
-            <a class="logout-btn" href="logout">Logout</a>
+            <div class="header-btns">
+                <a class="help-btn" href="help.jsp">Help</a>
+                <a class="logout-btn" href="logout">Logout</a>
+            </div>
         </header>
             
         <div class="report-cards">
