@@ -1,3 +1,15 @@
+# Default Login Credentials
+
+## Admin
+- **Email:** admin@gmail.com  
+- **Password:** 123  
+
+## Receptionist
+- **Email:** r1@gmail.com  
+- **Password:** 123  
+
+---
+
 # Ocean View Resort Management System
 
 The **Ocean View Resort Management System** is a web-based reservation management system designed for a popular beachside hotel in **Galle, Sri Lanka**.
@@ -83,18 +95,6 @@ Open your browser and access:
 ```
 http://localhost:8080/Ocean-View-Resort-Management-System
 ```
-
----
-
-# Default Login Credentials
-
-## Admin
-- **Email:** admin@gmail.com  
-- **Password:** 123  
-
-## Receptionist
-- **Email:** r1@gmail.com  
-- **Password:** 123  
 
 ---
 
