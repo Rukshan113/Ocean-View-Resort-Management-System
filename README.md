@@ -1,70 +1,109 @@
-Ocean View Resort Management System
+# Ocean View Resort Management System
 
-The Ocean View Resort Management System is a web-based reservation management system designed for a popular beachside hotel in Galle, Sri Lanka.
-It automates room reservations, guest registration, billing, and reporting, replacing the traditional manual process to improve efficiency, reduce errors,
-and enhance the overall guest experience.
+The **Ocean View Resort Management System** is a web-based reservation management system designed for a popular beachside hotel in **Galle, Sri Lanka**.
 
-This project is implemented using Java (JSP/Servlets) with a MySQL database and follows MVC architecture and DAO design pattern. 
+It automates **room reservations, guest registration, billing, and reporting**, replacing the traditional manual process to improve efficiency, reduce errors, and enhance the overall guest experience.
 
-Features
+This project is implemented using **Java (JSP/Servlets)** with a **MySQL database** and follows **MVC Architecture** and the **DAO Design Pattern**.
 
-User Authentication
+---
 
-  Secure login for Admin and Receptionist roles
-  
-  Role-based access control (RBAC)
-  
-  First-time login requires password change
+# Features
 
-User Management (Admin)
+## User Authentication
+- Secure login for **Admin** and **Receptionist** roles  
+- **Role-Based Access Control (RBAC)**  
+- **First-time login requires password change**
 
-  Create, search, update, and delete staff accounts
+## User Management (Admin)
+- Create staff accounts  
+- Search staff accounts  
+- Update staff accounts  
+- Delete staff accounts  
 
-Guest & Reservation Management
+## Guest & Reservation Management
+- Add reservations  
+- Search reservations  
+- Cancel reservations  
+- Assign rooms based on availability  
 
-  Add, search and cancel reservations
-  
-  Assign rooms based on availability
+## Billing
+- Automated calculation of total bill based on **room type and duration**
 
-Billing
+## Reports
+- Show reservation information
 
-  Automated calculation of total bill based on room type and duration
+---
 
-Reports
+# System Architecture
 
-System Architecture
+## Three-Tier Architecture
 
-Three-Tier Architecture
+**Presentation Layer**
+- JSP  
+- HTML / CSS  
 
-  Presentation Layer: JSP + HTML/CSS
-  
-  Business Logic Layer: Java Servlets
-  
-  Data Access Layer: DAO classes connecting to MySQL
+**Business Logic Layer**
+- Java Servlets  
 
-Follows MVC Design Pattern for maintainability and scalability
+**Data Access Layer**
+- DAO classes connected to MySQL  
 
-Implements DAO Pattern for database interaction
+Additional Design Principles:
 
+- Follows **MVC Design Pattern** for maintainability and scalability  
 
-Installation / Setup
-  Clone the repository,
-  git clone https://github.com/Rukshan113/Ocean-View-Resort-Management-System.git
-  
-  Import the project into NetBeans or your preferred Java IDE.
+---
 
-  Setup the MySQL database,
-  Run the provided SQL scripts in the database folder to create tables (Users, Rooms, Reservations)
+# Installation / Setup
 
-  Deploy the project on Apache Tomcat.
+## 1. Clone the Repository
 
-  Access the system via your browser:
-    http://localhost:8080/Ocean-View-Resort-Management-System
+```bash
+git clone https://github.com/Rukshan113/Ocean-View-Resort-Management-System.git
+```
 
-Default login credentials:
+## 2. Import the Project
+Import the project into **NetBeans** or your preferred **Java IDE**.
 
-Admin: email - admin@gmail.com
-       password - 123
+## 3. Setup the Database
+Run the SQL scripts provided in the **database folder** to create the required tables:
 
-Receptionist: email - r1@gmail.com 
-              password - 123
+- Users  
+- Rooms  
+- Reservations  
+
+## 4. Deploy the Application
+Deploy the project on **Apache Tomcat Server**.
+
+## 5. Run the System
+
+Open your browser and access:
+
+```
+http://localhost:8080/Ocean-View-Resort-Management-System
+```
+
+---
+
+# Default Login Credentials
+
+## Admin
+- **Email:** admin@gmail.com  
+- **Password:** 123  
+
+## Receptionist
+- **Email:** r1@gmail.com  
+- **Password:** 123  
+
+---
+
+# Technologies Used
+
+- Java (JSP / Servlets)
+- MySQL
+- HTML
+- CSS
+- Apache Tomcat
+- MVC Architecture
+- DAO Design Pattern
